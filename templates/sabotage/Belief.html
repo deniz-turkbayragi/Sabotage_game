@@ -1,0 +1,17 @@
+
+{% extends "global/BaseMotherhood.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Soru
+{% endblock %}
+
+{% block content %}
+
+<p>Lütfen bu etkinlikteki performansınızı düşünün. Sizce grubunuz içinde kaçıncı olmuşsunuzdur? (Eğer doğru tahmin ederseniz ek olarak 10 TL kazanacaksınız)</p>
+
+{% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

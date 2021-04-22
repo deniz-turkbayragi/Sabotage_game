@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+OYUN 2- Etkinlik kuralları
+{% endblock %}
+
+{% block content %}
+
+<div id="buttonNext" style="text-align:right; visibility: hidden">
+    {% next_button %}
+</div>
+
+<audio id="video"  controls autoplay>
+    <source src="{% static audio_path %}"  type="audio/mp3">
+</audio>
+
+
+<script>
+
+    var video = document.getElementById('video');
+    var supposedCurrentTime = 0;
+    video.addEventListener('timeupdate', function() {
+      if (!video.seeking) {
+            supposedCurrentTime = video.currentTime;
+      }
+    });
+    video.addEventListener('seeking', function() {
+      var delta = video.currentTime - supposedCurrentTime;
+      if (delta > 0.01) {
+        video.currentTime = supposedCurrentTime;
+      }
+    });
+    console.log(video)
+    video.addEventListener('ended', function() {
+        document.getElementById("buttonNext").style.visibility = "initial";
+        supposedCurrentTime = 0;
+    });
+</script>
+
+    {% formfields %}
+
+<br> </br>
+<h5>
+<ul>
+  <li>Bu oyunda sizden önce iki dakika boyunca bir iş yapmanızı isteyeceğiz.</li>
+  <li>Size dört karakterden oluşan harf-rakam grupları gösterilecek, ve bu kelimelerin aynısını alttaki boşluğa yazmaya çalışacaksınız.</li>
+  <li>İki dakika içinde ne kadar çok doğru cevap verirseniz para kazanma şansınız o kadar yüksek olacak.</li>
+  <li>Sürenin sonunda biriminiz içinden bir kişi ile rastgele eşleştirileceksiniz.</li>
+    <li>Eğer <b> eşleştiğiniz kişiden daha fazla sayıda </b> doğru cevap vermişseniz <b>150 TL</b>, eğer <b> daha az doğru cevap </b> vermişseniz <b>0 TL</b> kazanacaksınız.</li>
+    <li> Oyunların sonunda, kuradan bu oyun çıkarsa, bu oyundaki kazancınızı elde edeceksiniz.</li>
+</ul>
+</h5>
+
+
+
+{% endblock %}

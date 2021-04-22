@@ -1,0 +1,79 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+     OYUN 2- Karar
+{% endblock %}
+
+{% block content %}
+
+<div id="buttonNext" style="text-align:right; visibility: hidden">
+    {% next_button %}
+</div>
+
+<audio id="video"  controls autoplay>
+    <source src="{% static audio_path %}" type="audio/mp3">
+</audio>
+
+
+<script>
+
+    var video = document.getElementById('video');
+    var supposedCurrentTime = 0;
+    video.addEventListener('timeupdate', function() {
+      if (!video.seeking) {
+            supposedCurrentTime = video.currentTime;
+      }
+    });
+    video.addEventListener('seeking', function() {
+      var delta = video.currentTime - supposedCurrentTime;
+      if (delta > 0.01) {
+        video.currentTime = supposedCurrentTime;
+      }
+    });
+    console.log(video)
+    video.addEventListener('ended', function() {
+        document.getElementById("buttonNext").style.visibility = "initial";
+        supposedCurrentTime = 0;
+    });
+</script>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax"> SEN </th>
+    <th class="tg-0lax"> EŞLEŞTİĞİN KİŞİ </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax"><img src="{% static own_avatar %}"  /></td>
+      <td class="tg-0lax"><img src="{% static other_avatar %}"  /></td>
+ </tr>
+</tbody>
+</table>
+
+
+
+<br>
+Kazançlar ve sıralamalar belirlenmeden önce sizden bir karar vermenizi isteyeceğiz.
+Bu bölümde grubunuzdaki sadece bir kişinin, diğer grup üyesinin performansını azaltabilme şansınız olacak.
+Eşleştiğiniz kişinin performansını <b>1 doğru </b> eksiltmek için <b> 10 TL </b> ödeyeceksiniz.
+Bu karar için harcayabildiğiniz ek <b>50 TL</b>'niz var. Eşleştiğiniz kişiden maksimum 5 doğru azaltabileceksiniz. 50 TL’den kullanmadığınız miktar, toplam kazancınıza eklenecektir
+50 TL’nizin ne kadarını bu karar için kullanmak istersiniz? Seçtiğiniz miktarın kaç doğruya eşit olduğunu hesaplayıp diğer kişinin doğru sayısından o kadar eksilteceğiz. </i> </p>
+
+
+{% formfields %}
+
+{% next_button %}
+
+
+{% endblock %}
