@@ -1,0 +1,39 @@
+
+{% extends "global/BaseMotherhood.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    OYUN 2- Etkinlik Kuralları
+{% endblock %}
+
+{% block content %}
+
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h2 class="panel-sub-heading">
+        
+    </h2>
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'global/matrix.css' %}"/>
+
+    <p>
+        Birazdan size dört harften oluşan harf-rakam kombinasyonları gösterilecek, ve bu kelimelerin aynısını alttaki boşluğa doğru bir şekilde yazmaya çalışacaksınız.
+        Amacınız {{ player.task_timer}} saniye içinde yapabildiğiniz kadar doğru cevap vermek.
+    </p>
+
+    <p>
+           <b> UYARI: İlerle tuşuna bastığınız zaman {{ player.task_timer}} saniye süreniz başlayacaktır. Lütfen hazır olduğunuzda "İlerle" butonuna basınız. </b><br>
+    </p>
+
+	
+
+
+</div>
+
+      {% next_button %}<br><br><br>
+
+
+{% endblock %}

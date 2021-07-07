@@ -1,0 +1,51 @@
+
+{% extends "global/BaseMotherhood.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    OYUN 2-Ek soru
+{% endblock %}
+
+{% block content %}
+
+<div id="buttonNext" style="text-align:right; visibility: hidden">
+    {% next_button %}
+</div>
+
+<audio id="video"  controls autoplay>
+    <source src="{% static audio_path %}"  type="audio/mp3">
+</audio>
+
+
+<script>
+
+    var video = document.getElementById('video');
+    var supposedCurrentTime = 0;
+    video.addEventListener('timeupdate', function() {
+      if (!video.seeking) {
+            supposedCurrentTime = video.currentTime;
+      }
+    });
+    video.addEventListener('seeking', function() {
+      var delta = video.currentTime - supposedCurrentTime;
+      if (delta > 0.01) {
+        video.currentTime = supposedCurrentTime;
+      }
+    });
+    console.log(video)
+    video.addEventListener('ended', function() {
+        document.getElementById("buttonNext").style.visibility = "initial";
+        supposedCurrentTime = 0;
+    });
+</script>
+
+
+
+<p> Sizce eşleştiğiniz kişi, sizin performansınızı azaltmak için kaç TL harcamıştır? Lütfen aşağıdaki boşluğa 0 ile 50 arasında bir sayı giriniz. (Eğer doğru sayıya yaklaşırsanız ekstra 10 TL kazanacaksınız.)</p>
+
+{% formfields %}
+
+{% next_button %}
+
+
+{% endblock %}
